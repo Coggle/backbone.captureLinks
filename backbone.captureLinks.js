@@ -5,7 +5,7 @@ Backbone.Router.captureLinks = function() {
   // All navigation that is relative should be passed through the navigate
   // method, to be processed by the router. If the link has a `data-bypass`
   // attribute, bypass the delegation completely.
-  $(document).on("click", "a[href]:not([data-bypass])", function(evt) {
+  $(document).on("click", "a[href]:not([data-bypass]):not([target=_blank])", function(evt) {
     if (Backbone.Router._disableCaptureLinks) return;
     // if this looks like a click with a modifier to open-in-new-tab, then
     // don't route it in this tab:
@@ -15,7 +15,7 @@ Backbone.Router.captureLinks = function() {
 
     // Get the absolute anchor href.
     var href = { prop: $(this).prop("href"), attr: $(this).attr("href") };
-    
+
     // Get the absolute root.
     var root = location.protocol + "//" + location.host;
     // Ensure the root is part of the anchor href, meaning it's relative.
